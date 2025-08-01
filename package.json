@@ -1,0 +1,37 @@
+{
+  "name": "clio-mcp-server",
+  "version": "1.0.0",
+  "description": "Cross-platform Model Context Protocol server for Clio legal practice management",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "clio-mcp": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "setup": "node scripts/setup.js",
+    "test": "node examples/test-api.js"
+  },
+  "keywords": [
+    "mcp",
+    "clio",
+    "legal",
+    "claude",
+    "ai",
+    "assistant"
+  ],
+  "author": "LROC-NY",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LROC-NY/clio-mcp-server.git"
+  }
+}
