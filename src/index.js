@@ -15,6 +15,7 @@ import { loadConfig } from './config.js';
 import { makeClioRequest } from './api.js';
 import { detectPlatform } from './platforms/detector.js';
 import { additionalTools, handleAdditionalTool } from './tools/additional-tools.js';
+import { customFieldTools, handleCustomFieldTool } from './tools/custom-fields.js';
 
 // Load configuration based on environment
 const config = await loadConfig();
@@ -219,6 +220,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     ...additionalTools,
+    ...customFieldTools,
   ],
 }));
 
@@ -424,6 +426,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         // Check if it's an additional tool
         if (additionalTools.find(tool => tool.name === name)) {
           const result = await handleAdditionalTool(name, args, config, makeClioRequest);
+          return {
+            content: [
+              {
+                type: 'text',
+                text: JSON.stringify(result, null, 2),
+              },
+            ],
+          };
+        }
+        // Check if it's a custom field tool
+        if (customFieldTools.find(tool => tool.name === name)) {
+          const result = await handleCustomFieldTool(name, args, config, makeClioRequest);
           return {
             content: [
               {

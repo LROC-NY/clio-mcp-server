@@ -134,6 +134,12 @@ npm run setup
 - `get_custom_fields` - Get custom field definitions
 - `search` - Search across multiple resources
 
+### Custom Fields Management
+- `get_matter_with_custom_fields` - Get a matter with all custom field values
+- `update_custom_field` - Update a specific custom field value
+- `create_custom_field_value` - Create a new custom field value
+- `bulk_update_custom_fields` - Update multiple custom fields at once
+
 ### User & Account
 - `get_users` - Get list of firm users
 - `get_current_user` - Get authenticated user info
