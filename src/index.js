@@ -16,6 +16,8 @@ import { makeClioRequest } from './api.js';
 import { detectPlatform } from './platforms/detector.js';
 import { additionalTools, handleAdditionalTool } from './tools/additional-tools.js';
 import { customFieldTools, handleCustomFieldTool } from './tools/custom-fields.js';
+import { documentAutomationTools, handleDocumentAutomationTool } from './tools/document-automation.js';
+import { clientCommunicationTools, handleClientCommunicationTool } from './tools/client-communication.js';
 
 // Load configuration based on environment
 const config = await loadConfig();
@@ -221,6 +223,8 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     ...additionalTools,
     ...customFieldTools,
+    ...documentAutomationTools,
+    ...clientCommunicationTools,
   ],
 }));
 
@@ -438,6 +442,30 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         // Check if it's a custom field tool
         if (customFieldTools.find(tool => tool.name === name)) {
           const result = await handleCustomFieldTool(name, args, config, makeClioRequest);
+          return {
+            content: [
+              {
+                type: 'text',
+                text: JSON.stringify(result, null, 2),
+              },
+            ],
+          };
+        }
+        // Check if it's a document automation tool
+        if (documentAutomationTools.find(tool => tool.name === name)) {
+          const result = await handleDocumentAutomationTool(name, args, config, makeClioRequest);
+          return {
+            content: [
+              {
+                type: 'text',
+                text: JSON.stringify(result, null, 2),
+              },
+            ],
+          };
+        }
+        // Check if it's a client communication tool
+        if (clientCommunicationTools.find(tool => tool.name === name)) {
+          const result = await handleClientCommunicationTool(name, args, config, makeClioRequest);
           return {
             content: [
               {

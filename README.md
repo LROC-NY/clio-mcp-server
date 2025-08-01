@@ -140,6 +140,21 @@ npm run setup
 - `create_custom_field_value` - Create a new custom field value
 - `bulk_update_custom_fields` - Update multiple custom fields at once
 
+### Document Automation (Clio Draft)
+- `list_document_templates` - List available document templates
+- `create_document_from_template` - Create documents with auto-populated data
+- `upload_document_template` - Upload custom document templates
+- `batch_create_documents` - Create multiple documents at once
+- `get_document_content` - Retrieve document content in various formats
+
+### eSignature Management
+- `send_document_for_signature` - Send documents for electronic signature
+- `get_signature_status` - Check signature request status
+
+### Court Forms
+- `get_court_forms` - Get jurisdiction-specific court forms
+- `fill_court_form` - Auto-fill court forms with matter data
+
 ### User & Account
 - `get_users` - Get list of firm users
 - `get_current_user` - Get authenticated user info
