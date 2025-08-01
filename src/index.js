@@ -14,6 +14,7 @@ import {
 import { loadConfig } from './config.js';
 import { makeClioRequest } from './api.js';
 import { detectPlatform } from './platforms/detector.js';
+import { additionalTools, handleAdditionalTool } from './tools/additional-tools.js';
 
 // Load configuration based on environment
 const config = await loadConfig();
@@ -217,6 +218,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ['code'],
       },
     },
+    ...additionalTools,
   ],
 }));
 
@@ -419,6 +421,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       default:
+        // Check if it's an additional tool
+        if (additionalTools.find(tool => tool.name === name)) {
+          const result = await handleAdditionalTool(name, args, config, makeClioRequest);
+          return {
+            content: [
+              {
+                type: 'text',
+                text: JSON.stringify(result, null, 2),
+              },
+            ],
+          };
+        }
         throw new Error(`Unknown tool: ${name}`);
     }
   } catch (error) {

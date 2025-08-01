@@ -115,6 +115,7 @@ npm run setup
 
 ## Available Tools
 
+### Core Resources
 - `get_matters` - Retrieve legal matters
 - `get_contacts` - Retrieve contacts
 - `get_tasks` - Retrieve tasks
@@ -122,6 +123,26 @@ npm run setup
 - `get_activities` - Retrieve time entries
 - `get_calendar_entries` - Retrieve calendar events
 - `get_documents` - Retrieve documents
+
+### Financial & Billing
+- `get_bills` - Retrieve bills with status filtering
+- `get_trust_accounts` - Get trust account information
+- `get_allocations` - Get billing allocations
+
+### Advanced Features
+- `get_timeline_events` - Get timeline events for matters
+- `get_custom_fields` - Get custom field definitions
+- `search` - Search across multiple resources
+
+### User & Account
+- `get_users` - Get list of firm users
+- `get_current_user` - Get authenticated user info
+
+### Webhooks
+- `create_webhook` - Create webhook subscriptions
+- `get_webhooks` - List webhook subscriptions
+
+### Authentication
 - `get_auth_url` - Generate OAuth authorization URL
 - `exchange_code` - Exchange auth code for access token
 
